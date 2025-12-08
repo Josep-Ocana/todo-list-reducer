@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Stats from "./components/Stats";
@@ -6,6 +6,7 @@ import Form from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import { initialState, todoReducer } from "./reducer/todoReducer";
 import type { Todo } from "./types";
+import { formattedText } from "./utils";
 
 function App() {
   const init = (): { todos: Todo[] } => {
@@ -27,21 +28,24 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(state.todos));
   }, [state.todos]);
 
-  const addTodo = (tarea: string) => {
-    dispatch({ type: "ADD_TODO", payload: tarea });
-  };
+  const addTodo = useCallback((tarea: string) => {
+    dispatch({ type: "ADD_TODO", payload: formattedText(tarea) });
+  }, []);
 
-  const onDelete = (id: Todo["id"]) => {
+  const onDelete = useCallback((id: Todo["id"]) => {
     dispatch({ type: "DELETE_TODO", payload: id });
-  };
+  }, []);
 
-  const onToggle = (id: Todo["id"]) => {
+  const onToggle = useCallback((id: Todo["id"]) => {
     dispatch({ type: "TOGGLE_TODO", payload: id });
-  };
+  }, []);
 
-  const updateTodo = (id: Todo["id"], newText: string) => {
-    dispatch({ type: "UPDATE_TODO", payload: { id, text: newText } });
-  };
+  const updateTodo = useCallback((id: Todo["id"], newText: string) => {
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: { id, text: formattedText(newText) },
+    });
+  }, []);
 
   return (
     <>

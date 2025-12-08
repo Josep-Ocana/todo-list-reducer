@@ -15,7 +15,7 @@ const TodoList = ({ todos, onToggle, updateTodo, onDelete }: TodoListProps) => {
         <p className="bg-white shadow-lg rounded-lg p-5 text-lg text-center">
           {" "}
           No tienes ninguna{" "}
-          <span className="text-sky-600 font-black">tarea</span>{" "}
+          <span className="text-sky-600 font-black">Tarea</span>{" "}
         </p>
       ) : (
         <div className="space-y-3">
