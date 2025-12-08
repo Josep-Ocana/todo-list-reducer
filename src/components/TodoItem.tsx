@@ -41,7 +41,7 @@ const TodoItem = ({ todo, onToggle, updateTodo, onDelete }: TodoItemProps) => {
         <>
           <input
             type="text"
-            className="mr-auto ml-3 border rounded-lg w-full m-1 p-2"
+            className="mr-auto ml-3 border rounded-lg w-full m-1 p-2 "
             value={editText}
             onChange={(e) => setEditText(e.target.value)}
           />
